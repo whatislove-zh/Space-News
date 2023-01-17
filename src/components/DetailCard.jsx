@@ -1,7 +1,6 @@
-import { autocompleteClasses, Box, Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import React from "react";
 import { Container } from "@mui/system";
-import zIndex from "@mui/material/styles/zIndex";
 import { BackToHomeBtn } from "./BackToHomeBtn";
 
 export const DetailCard = (props) => {
