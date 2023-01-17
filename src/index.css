@@ -5,3 +5,8 @@
 body{
   background: #ffffff;
 }
+
+.detail_img{
+  object-fit: cover;
+  
+}
