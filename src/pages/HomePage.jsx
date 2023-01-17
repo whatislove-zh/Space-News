@@ -1,15 +1,16 @@
 import { Search } from "../components/Search";
 import { Results } from "../components/Results";
 import { PostCard } from "../components/PostCard";
+import { Loader } from "../components/Loader";
 
 import { selectAllPosts, selectPostsInfo } from "../store/posts/posts-selectors";
 import { loadPosts } from "../store/posts/posts-actions";
 
 import { Grid } from "@mui/material";
+import { Container } from "@mui/system";
 
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { Loader } from "../components/Loader";
 
 export const HomePage = () => {
   const dispatch = useDispatch();
@@ -23,7 +24,7 @@ export const HomePage = () => {
   }, [qty, dispatch]);
 
   return (
-    <>
+    <Container sx={{ mt: "50px", maxWidth: "1290px" }}>
       <Search />
       <Results />
 
@@ -36,6 +37,6 @@ export const HomePage = () => {
           ))}
         </Grid>
       )}
-    </>
+    </Container>
   );
 };
