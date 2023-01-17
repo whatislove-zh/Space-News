@@ -18,6 +18,10 @@ const setPost = (post) => ({
     payload: post
 })
 
+export const clearDetails = () => ({
+    type: CLEAR_DETAILS
+})
+
 export const loadPostById = (id) => (dispatch, _, {client, api}) => {
     dispatch(setLoading())
 

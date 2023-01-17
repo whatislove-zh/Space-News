@@ -1,4 +1,4 @@
-import { SET_LOADING, SET_POST, SET_ERROR } from "./details-actions";
+import { SET_LOADING, SET_POST, SET_ERROR, CLEAR_DETAILS } from "./details-actions";
 
 const initialState = {
   currentPost: null,
@@ -21,11 +21,13 @@ export const detailsReduser = (state = initialState, { type, payload }) => {
         error: payload,
       };
     case SET_POST:
-        return {
-            ...state,
-            status: "received",
-            currentPost: payload
-        }
+      return {
+        ...state,
+        status: "received",
+        currentPost: payload,
+      };
+    case CLEAR_DETAILS:
+      return initialState;
     default:
       return state;
   }
