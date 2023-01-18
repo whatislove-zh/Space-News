@@ -1,5 +1,5 @@
 import { Typography } from "@mui/material";
-import { Container, flexbox } from "@mui/system";
+import { Container } from "@mui/system";
 import { BackToHomeBtn } from "../components/BackToHomeBtn";
 
 export const NotFound = () => {
