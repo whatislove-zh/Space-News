@@ -63,7 +63,7 @@ export const PostCard = (props) => {
           <Typography
             gutterBottom
             variant="h6"
-            sx={{ height: "88px", mb: "1rem", cursor: "pointer" }}
+            sx={{ height: "88px", mb: "1rem", cursor: "pointer", overflow:"hidden" }}
             component="p"
             onClick={() => navigate(`/posts/${id}`)}
           >
