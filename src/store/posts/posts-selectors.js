@@ -7,9 +7,19 @@ export const selectPostsInfo = (state) => ({
 export const selectAllPosts = (state) => state.posts.list;
 
 export const selectVisiblePosts = (state, { search = "" }) => {
+  const searchArr = search.split(" ")
+
+  if (searchArr.length > 1 && searchArr.includes("")) {
+    searchArr.splice(searchArr.length-1, 1)
+  }
+  
+  
+
   return state.posts.list.filter(
     (post) =>
-      post.title.toLowerCase().includes(search.toLowerCase()) ||
-      post.summary.toLowerCase().includes(search.toLowerCase())
+      searchArr.some((el) =>
+            post.title.toLowerCase().includes(el.toLowerCase()) ||
+            post.summary.toLowerCase().includes(el.toLowerCase())
+        )
   );
 };
