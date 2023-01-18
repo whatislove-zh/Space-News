@@ -1,8 +1,20 @@
 import { Box,Grid, TextField, Typography, InputAdornment } from "@mui/material";
 import SearchIcon from '@mui/icons-material/Search';
+import { useDispatch, useSelector } from "react-redux";
+import { selectSearch } from "../store/controls/controls-selectors";
+import { setSearch } from "../store/controls/controls-actions";
 
 
 export const Search = () => {
+
+  const dispatch = useDispatch()
+
+  const search = useSelector(selectSearch)
+
+  const handleSearch = (e) => {
+    dispatch(setSearch(e.target.value))
+  }
+
   return (
     <Grid container sx={{mb:"40px"}}>
       <Grid item xs={8} md={4}>
@@ -11,7 +23,9 @@ export const Search = () => {
         </Typography>
         <Box sx={{ display: "flex", alignItems: "center"  }}>
           
-          <TextField
+          <TextField 
+            onChange={handleSearch}
+            value={search}
             placeholder="Search"
             variant="outlined"
             type="search"
