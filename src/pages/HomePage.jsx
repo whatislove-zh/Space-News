@@ -3,7 +3,10 @@ import { Results } from "../components/Results";
 import { PostCard } from "../components/PostCard";
 import { Loader } from "../components/Loader";
 
-import { selectPostsInfo, selectVisiblePosts } from "../store/posts/posts-selectors";
+import {
+  selectPostsInfo,
+  selectVisiblePosts,
+} from "../store/posts/posts-selectors";
 import { loadPosts } from "../store/posts/posts-actions";
 
 import { Grid } from "@mui/material";
@@ -14,22 +17,32 @@ import { useEffect } from "react";
 import { selectSearch } from "../store/controls/controls-selectors";
 
 export const HomePage = () => {
-  
   const dispatch = useDispatch();
-  const search = useSelector(selectSearch)
-  
-  const posts = useSelector((state) => (
-    selectVisiblePosts(state, {search})
-  ))
+  const search = useSelector(selectSearch);
+  const searchArr = search.split(" ");
 
-  
-  
+  const posts = useSelector((state) => selectVisiblePosts(state, { search }));
+
+  //const posts = useSelector(selectAllPosts)
+  const sortingRules = (a, b) => {
+    if (
+      searchArr.some((el) => b.title.toLowerCase().includes(el.toLowerCase()))
+    ) {
+      return 1;
+    }
+    if (
+      searchArr.some((el) => a.title.toLowerCase().includes(el.toLowerCase()))
+    ) {
+      return -1;
+    }
+    return 0;
+  };
+  const sortedPosts = [...posts].sort(sortingRules);
 
   const { status, error, qty } = useSelector(selectPostsInfo);
 
   useEffect(() => {
-    !qty && dispatch(loadPosts())
-    
+    !qty && dispatch(loadPosts());
   }, [qty, dispatch]);
 
   return (
@@ -41,7 +54,7 @@ export const HomePage = () => {
       {status === "loading" && <Loader />}
       {status === "received" && (
         <Grid container spacing={2} sx={{ mt: "45px" }}>
-          {posts.map((post) => (
+          {sortedPosts.map((post) => (
             <PostCard key={post.id} {...post} />
           ))}
         </Grid>
