@@ -3,7 +3,7 @@ import { Results } from "../components/Results";
 import { PostCard } from "../components/PostCard";
 import { Loader } from "../components/Loader";
 
-import { selectAllPosts, selectPostsInfo } from "../store/posts/posts-selectors";
+import { selectPostsInfo, selectVisiblePosts } from "../store/posts/posts-selectors";
 import { loadPosts } from "../store/posts/posts-actions";
 
 import { Grid } from "@mui/material";
@@ -11,16 +11,25 @@ import { Container } from "@mui/system";
 
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
+import { selectSearch } from "../store/controls/controls-selectors";
 
 export const HomePage = () => {
+  
   const dispatch = useDispatch();
+  const search = useSelector(selectSearch)
+  
+  const posts = useSelector((state) => (
+    selectVisiblePosts(state, {search})
+  ))
 
-  const posts = useSelector(selectAllPosts)
+  
+  
 
   const { status, error, qty } = useSelector(selectPostsInfo);
 
   useEffect(() => {
-    !qty && dispatch(loadPosts());
+    !qty && dispatch(loadPosts())
+    
   }, [qty, dispatch]);
 
   return (
