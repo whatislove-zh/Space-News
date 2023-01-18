@@ -12,10 +12,15 @@ import { useNavigate } from "react-router-dom";
 
 import CalendarMonthSharpIcon from "@mui/icons-material/CalendarMonthSharp";
 import { Box } from "@mui/system";
-
+import Highlighter from "react-highlight-words";
+import { useSelector } from "react-redux";
+import { selectSearch } from "../store/controls/controls-selectors";
 
 export const PostCard = (props) => {
   const { title, imageUrl, summary, publishedAt, id } = props;
+
+  const search = useSelector(selectSearch)
+  const highlighted = search.split(" ")
 
   const navigate = useNavigate();
 
@@ -62,7 +67,13 @@ export const PostCard = (props) => {
             component="p"
             onClick={() => navigate(`/posts/${id}`)}
           >
-            {title.substr(0, 52) + "..."}
+            <Highlighter
+              highlightClassName="YourHighlightClass"
+              searchWords={highlighted}
+              autoEscape={true}
+              textToHighlight={title.substr(0, 52) + "..."}
+            />
+            
           </Typography>
           <Typography
             variant="body2"
@@ -70,7 +81,13 @@ export const PostCard = (props) => {
             height={96}
             fontSize={16}
           >
-            {summary.substr(0, 150) + "..."}
+            <Highlighter
+              highlightClassName="YourHighlightClass"
+              searchWords={highlighted}
+              autoEscape={true}
+              textToHighlight={summary.substr(0, 150) + "..."}
+            />
+            
           </Typography>
         </CardContent>
         <CardActions>
