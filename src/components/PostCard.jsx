@@ -63,29 +63,30 @@ export const PostCard = (props) => {
           <Typography
             gutterBottom
             variant="h6"
-            sx={{ height: "58px", mb: "1rem", cursor: "pointer" }}
+            sx={{ height: "88px", mb: "1rem", cursor: "pointer" }}
             component="p"
             onClick={() => navigate(`/posts/${id}`)}
           >
             <Highlighter
-              highlightClassName="YourHighlightClass"
+              
               searchWords={highlighted}
               autoEscape={true}
-              textToHighlight={title.substr(0, 52) + "..."}
+              textToHighlight={title}
             />
             
           </Typography>
           <Typography
             variant="body2"
             color="text.secondary"
-            height={96}
+            height={70}
             fontSize={16}
+            
           >
             <Highlighter
-              highlightClassName="YourHighlightClass"
+              
               searchWords={highlighted}
               autoEscape={true}
-              textToHighlight={summary.substr(0, 150) + "..."}
+              textToHighlight={summary.substr(0, 135)+"..."}
             />
             
           </Typography>
