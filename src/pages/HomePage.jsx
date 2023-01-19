@@ -37,7 +37,7 @@ export const HomePage = () => {
     }
     return 0;
   };
-  const sortedPosts = [...posts].sort(sortingRules);
+  
 
   const { status, error, qty } = useSelector(selectPostsInfo);
 
@@ -54,7 +54,7 @@ export const HomePage = () => {
       {status === "loading" && <Loader />}
       {status === "received" && (
         <Grid container spacing={2} sx={{ mt: "45px" }}>
-          {sortedPosts.map((post) => (
+          {posts.sort(sortingRules).map((post) => (
             <PostCard key={post.id} {...post} />
           ))}
         </Grid>
