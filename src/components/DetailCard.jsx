@@ -13,7 +13,7 @@ export const DetailCard = (props) => {
           className="detail_img"
           src={imageUrl}
           alt={title}
-          width={"100%"}
+          width="100%"
           height="100%"
         />
       </Box>
